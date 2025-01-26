@@ -1,0 +1,35 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+           // Step 1: Trim leading and trailing spaces
+        int left = 0, right = s.size() - 1;
+        while (left <= right && s[left] == ' ') left++;
+        while (left <= right && s[right] == ' ') right--;
+
+        // Step 2: Collect words
+        vector<string> words;
+        string word;
+        while (left <= right) {
+            if (s[left] != ' ') {
+                word += s[left];
+            } else if (!word.empty()) {
+                words.push_back(word);
+                word.clear();
+            }
+            left++;
+        }
+        if (!word.empty()) words.push_back(word);
+
+        // Step 3: Reverse the words
+        reverse(words.begin(), words.end());
+
+        // Step 4: Join the words into a single string
+        string result;
+        for (int i = 0; i < words.size(); i++) {
+            result += words[i];
+            if (i < words.size() - 1) result += " ";
+        }
+
+        return result;
+    }
+};
